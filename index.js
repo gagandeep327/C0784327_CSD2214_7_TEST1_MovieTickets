@@ -1,72 +1,32 @@
-var price = 10; //price
-$(document).ready(function() {
-  var $cart = $('#selected-seats'), //Sitting Area
-    $counter = $('#counter'), //Votes
-    $total = $('#total'); //Total money
+const main = document.querySelector('.main');
+const seats = document.querySelector('.row.seat:not(.occupied)');
+const done = document.getElementById('done');
+const price= document.getElementById('price');
 
-  var sc = $('#seat-map').seatCharts({
-    map: [ //Seating chart
-      'aaaaaaaaaa',
-      'aaaaaaaaaa',
-      '__________',
-      'aaaaaaaa__',
-      'aaaaaaaaaa',
-      'aaaaaaaaaa',
-      'aaaaaaaaaa',
-      'aaaaaaaaaa',
-      'aaaaaaaaaa',
-      'aa__aa__aa'
-    ],
-    naming: {
-      top: false,
-      getLabel: function(character, row, column) {
-        return column;
-      }
-    },
-    legend: { //Definition legend
-      node: $('#legend'),
-      items: [
-        ['a', 'available', 'Option'],
-        ['a', 'unavailable', 'Sold']
-      ]
-    },
-    click: function() { //Click event
-      if (this.status() == 'available') { //optional seat
-        $('<li>R' + (this.settings.row + 1) + ' S' + this.settings.label + '</li>')
-          .attr('id', 'cart-item-' + this.settings.id)
-          .data('seatId', this.settings.id)
-          .appendTo($cart);
+const movieSelect = document.getElementById('movie');
+let ticketPrice = +movieSelect.value;
 
-        $counter.text(sc.find('selected').length + 1);
-        $total.text(recalculateTotal(sc) + price);
+const populateUI = () => {
+    const selectedSeats = JSON.parse(localStorage.getitem('selectedSeats'));
 
-        return 'selected';
-      } else if (this.status() == 'selected') { //Checked
-        //Update Number
-        $counter.text(sc.find('selected').length - 1);
-        //update totalnum
-        $total.text(recalculateTotal(sc) - price);
-
-        //Delete reservation
-        $('#cart-item-' + this.settings.id).remove();
-        //optional
-        return 'available';
-      } else if (this.status() == 'unavailable') { //sold
-        return 'unavailable';
-      } else {
-        return this.style();
-      }
+    if(selectedSeats !== null&& selectedSeats.length > 0) {
+        seats.forEach(seat,index) => {
+            if (selectedSeats.indexOf(index) > -1){
+                seat.classList.add('selected');
+            }
+        });
     }
-  });
-  sc.get(['1_2', '4_4', '4_5', '6_6', '6_7', '8_5', '8_6', '8_7', '8_8', '10_1', '10_2']).status('unavailable');
 
-});
+    const selectedMovieIndex = localStorage.getitem('selectedMovieIndex');
+    const selectedMoviePrice = localStorage.getitem('selectedMoviePrice');
 
-function recalculateTotal(sc) {
-  var total = 0;
-  sc.find('selected').each(function() {
-    total += price;
-  });
+    if(selectedMovieIndex !== null){
+        movieSelect.selectIndex = selectedMovieIndex;
+    }
+    if
+        (selectedMoviePrice !==null){
+            done.innerText = selectedSeats.length;
+            price.innerText = selectedSeats.length * +selectedMoviePrice;
+        }
+    };
 
-  return total;
-}

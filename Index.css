@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+body{
+    background-color: rgb(112, 112, 189);
+    color: #fff;
+    display : flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 0;
+}
+.main{
+    margin: 20px 0;
+}
+
+.main select{
+    background-color: #fff;
+    border: 0;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-left: 10px;
+    padding:5px 15px 5px 15px;
+
+}
+
+.container{
+    perspective: 1000px;
+    margin-bottom: 30px;
+}
+.seat{
+    background-color: #444451;
+    height: 12px;
+    width: 15px;
+    margin: 3px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+}
+
+.seat .selected{
+    background-color: blue;
+
+}
+.seat .occupied{
+    background-color: #fff;
+
+}
+.Seat:nth-of-type(2){
+    margin-right: 18px;
+}
+.Seat:nth-last-of-type(2){
+    margin-left: 18px;
+}
+
+.showcase{
+    background: rgb(39, 39, 219);
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #fff;
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+}
+.showcase li{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+
+}
+.showcase li small{
+    margin-left: 2px;
+}
+.row{
+    display: flex;
+}
+.screen{
+    background-color: #fff;
+    height: 70px;
+    width: 100%;
+    margin: 15px 0;
+    
+    box-shadow: 0 3px 10px green;
+
+}
+p.text{
+    margin: 5px 0;
+}
+p.text span{
+    color: rgb(15, 15, 82);
+}
